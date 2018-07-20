@@ -3,14 +3,24 @@ import {
   Text,
   View,
   AppRegistry,
-  Button
+  Button,
+  Image
 } from 'react-native'
 
 const Estilo = {
   geral: {
     marginVertical: 40
+  },
+  imagem: {
+    width:300,
+    height:300
+  },
+  viewImagem: {
+    alignItems: 'center'
   }
 }
+
+const {geral, imagem, viewImagem} = Estilo
 
 class App extends Component {
   constructor(props){
@@ -70,13 +80,28 @@ class App extends Component {
 
   render(){
     return(
-      <View style={Estilo.geral}>
-        <Text>Escolha do computador: {this.state.escolhaComputador}</Text>
+      <View style={geral}>
+
+      <Topo />
+      <View></View>
+      <View></View>
         <Text>Escolha do usuário: {this.state.escolhaUsuario}</Text>
+        <Text>Escolha do computador: {this.state.escolhaComputador}</Text>
         <Text>Resultado: {this.state.resultado} </Text>
         <Button title="Pedra" onPress={() => this.mudaEstado("Pedra")}></Button>
         <Button title="Papel" onPress={() => this.mudaEstado("Papel")}></Button>
         <Button title="Tesoura" onPress={() => this.mudaEstado("Tesoura")}></Button>
+      </View>
+    )
+  }
+}
+
+class Topo extends Component {
+  render(){
+    return(
+      <View style={viewImagem}>
+        <Image source={require('./img/jokenpo.png')}
+               style={imagem} />
       </View>
     )
   }
