@@ -10,11 +10,11 @@ import {
 
 const Estilo = StyleSheet.create({
   imagem: {
-    width:300,
-    height:300
+    width:200,
+    height:200
   },
   viewImagem: {
-    marginVertical: 40,
+    marginVertical: 30,
     alignItems: 'center'
   },
   painelBotao: {
@@ -25,10 +25,19 @@ const Estilo = StyleSheet.create({
   },
   botao: {
     width: 90,
+  },
+  palco: {
+    alignItems: 'center'
+  },
+  resultado: {
+    color: 'red',
+    fontSize: 32,
+    fontWeight: 'bold',
+    marginTop: 10
   }
 })
 
-const {geral, imagem, viewImagem, painelBotao, botao} = Estilo
+const {imagem, viewImagem, painelBotao, botao, palco, resultado} = Estilo
 
 class App extends Component {
   constructor(props){
@@ -101,10 +110,12 @@ class App extends Component {
                 <Button title="Tesoura" onPress={() => this.mudaEstado("Tesoura")}></Button>
           </View>
         </View>
-        <View>
+        <View style={palco}>
+          <Text style={resultado}>{this.state.resultado} </Text>
           <Text>Escolha do usuário: {this.state.escolhaUsuario}</Text>
+          <Image source ={require('./img/papel.png')}/>
           <Text>Escolha do computador: {this.state.escolhaComputador}</Text>
-          <Text>Resultado: {this.state.resultado} </Text>
+          <Image source ={require('./img/papel.png')}/>
         </View>
       </View>
     )
