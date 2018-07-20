@@ -27,17 +27,24 @@ const Estilo = StyleSheet.create({
     width: 90,
   },
   palco: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
   resultado: {
     color: 'red',
-    fontSize: 32,
+    fontSize: 50,
     fontWeight: 'bold',
-    marginTop: 10
+    marginTop: 5,
+    marginBottom: 10
+  },
+  jogadorComputador:{
+    color: 'grey',
+    fontSize: 16,
+    fontWeight: 'bold'
   }
 })
 
-const {imagem, viewImagem, painelBotao, botao, palco, resultado} = Estilo
+const {imagem, viewImagem, painelBotao, 
+      botao, palco, resultado, jogadorComputador} = Estilo
 
 class App extends Component {
   constructor(props){
@@ -46,8 +53,7 @@ class App extends Component {
     this.state = {
       escolhaUsuario: " ",
       escolhaComputador: " ",
-      resultado: "",
-      imagem: ""
+      resultado: ""
     }
   }
 
@@ -58,43 +64,31 @@ class App extends Component {
     optComputer[2]= "Papel"
     var sorteio = Math.floor(Math.random()*3)
     var res
-    var imagemJokenpo
+
     if(escolhaUser === 'Pedra'){
-      var imagemJokenpoJogador= <Image source ={require('./img/pedra.png')}/>
       if(optComputer[sorteio] === 'Pedra'){
-        var imagemJokenpoComputador= <Image source ={require('./img/pedra.png')}/>
         res = 'Empate'
       }else if(optComputer[sorteio] === 'Papel'){
-        var imagemJokenpoComputador= <Image source ={require('./img/papel.png')}/>
         res = 'Perdeu'
       }else if(optComputer[sorteio] === 'Tesoura'){
-        var imagemJokenpoComputador= <Image source ={require('./img/tesoura.png')}/>
         res = 'Ganhou'
       }
     }
     if(escolhaUser === 'Papel'){
-      var imagemJokenpoJogador = <Image source ={require('./img/papel.png')}/>
       if(optComputer[sorteio] === 'Pedra'){
-        var imagemJokenpoComputador= <Image source ={require('./img/pedra.png')}/>
         res = 'Ganhou'
       }else if(optComputer[sorteio] === 'Papel'){
-        var imagemJokenpoComputador= <Image source ={require('./img/papel.png')}/>
         res = 'Empate'
       }else if(optComputer[sorteio] === 'Tesoura'){
-        var imagemJokenpoComputador= <Image source ={require('./img/tesoura.png')}/>
         res = 'Perdeu'
       }
     }
     if(escolhaUser === 'Tesoura'){
-      var imagemJokenpoJogador = <Image source ={require('./img/tesoura.png')}/>
       if(optComputer[sorteio] === 'Pedra'){
-        var imagemJokenpoComputador= <Image source ={require('./img/pedra.png')}/>
         res = 'Perdeu'
       }else if(optComputer[sorteio] === 'Papel'){
-        var imagemJokenpoComputador= <Image source ={require('./img/papel.png')}/>
         res = 'Ganhou'
       }else if(optComputer[sorteio] === 'Tesoura'){
-        var imagemJokenpoComputador= <Image source ={require('./img/tesoura.png')}/>
         res = 'Empate'
       }
     }
@@ -102,12 +96,8 @@ class App extends Component {
     this.setState({
       escolhaUsuario: escolhaUser,
       escolhaComputador: optComputer[sorteio],
-      resultado: res,
-      imagemJogador: imagemJokenpoJogador,
-      imagemComputador: imagemJokenpoComputador,
+      resultado: res
     })
-
-    
   }
 
   render(){
@@ -126,11 +116,9 @@ class App extends Component {
           </View>
         </View>
         <View style={palco}>
-          <Text style={resultado}>{this.state.resultado} </Text>
-          <Text>Escolha do usuário: {this.state.escolhaUsuario}</Text>
-          <Text>{this.state.imagemJogador}</Text>
-          <Text>Escolha do computador: {this.state.escolhaComputador}</Text>
-          <Text>{this.state.imagemComputador}</Text>
+          <Text style={resultado}>{this.state.resultado}</Text>
+          <Palco escolha = {this.state.escolhaUsuario} jogador="Jogador"/>
+          <Palco escolha = {this.state.escolhaComputador} jogador="Computador"/>
         </View>
       </View>
     )
@@ -145,6 +133,37 @@ class Topo extends Component {
                style={imagem} />
       </View>
     )
+  }
+}
+
+class Palco extends Component {
+  render(){
+
+    if(this.props.escolha == 'Pedra'){
+      return (
+        <View style={{alignItems: "center"}}>
+          <Text style={jogadorComputador}>{this.props.jogador}</Text>
+          <Image source ={require('./img/pedra.png')}/>
+        </View>
+      )
+    }else if(this.props.escolha == 'Papel'){
+      return (
+        <View style={{alignItems: "center"}}>
+          <Text style={jogadorComputador}>{this.props.jogador}</Text>
+          <Image source ={require('./img/papel.png')}/>
+        </View>
+      )
+    }else if(this.props.escolha == 'Tesoura'){
+      return (
+        <View style={{alignItems: "center"}}>
+          <Text style={jogadorComputador}>{this.props.jogador}</Text>
+          <Image source ={require('./img/tesoura.png')}/>
+        </View>
+      )
+    }else {
+      return false
+    }
+
   }
 }
 
