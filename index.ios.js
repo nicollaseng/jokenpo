@@ -46,7 +46,8 @@ class App extends Component {
     this.state = {
       escolhaUsuario: " ",
       escolhaComputador: " ",
-      resultado: ""
+      resultado: "",
+      imagem: ""
     }
   }
 
@@ -57,31 +58,43 @@ class App extends Component {
     optComputer[2]= "Papel"
     var sorteio = Math.floor(Math.random()*3)
     var res
-
+    var imagemJokenpo
     if(escolhaUser === 'Pedra'){
+      var imagemJokenpoJogador= <Image source ={require('./img/pedra.png')}/>
       if(optComputer[sorteio] === 'Pedra'){
+        var imagemJokenpoComputador= <Image source ={require('./img/pedra.png')}/>
         res = 'Empate'
       }else if(optComputer[sorteio] === 'Papel'){
+        var imagemJokenpoComputador= <Image source ={require('./img/papel.png')}/>
         res = 'Perdeu'
       }else if(optComputer[sorteio] === 'Tesoura'){
+        var imagemJokenpoComputador= <Image source ={require('./img/tesoura.png')}/>
         res = 'Ganhou'
       }
     }
     if(escolhaUser === 'Papel'){
+      var imagemJokenpoJogador = <Image source ={require('./img/papel.png')}/>
       if(optComputer[sorteio] === 'Pedra'){
+        var imagemJokenpoComputador= <Image source ={require('./img/pedra.png')}/>
         res = 'Ganhou'
       }else if(optComputer[sorteio] === 'Papel'){
+        var imagemJokenpoComputador= <Image source ={require('./img/papel.png')}/>
         res = 'Empate'
       }else if(optComputer[sorteio] === 'Tesoura'){
+        var imagemJokenpoComputador= <Image source ={require('./img/tesoura.png')}/>
         res = 'Perdeu'
       }
     }
     if(escolhaUser === 'Tesoura'){
+      var imagemJokenpoJogador = <Image source ={require('./img/tesoura.png')}/>
       if(optComputer[sorteio] === 'Pedra'){
+        var imagemJokenpoComputador= <Image source ={require('./img/pedra.png')}/>
         res = 'Perdeu'
       }else if(optComputer[sorteio] === 'Papel'){
+        var imagemJokenpoComputador= <Image source ={require('./img/papel.png')}/>
         res = 'Ganhou'
       }else if(optComputer[sorteio] === 'Tesoura'){
+        var imagemJokenpoComputador= <Image source ={require('./img/tesoura.png')}/>
         res = 'Empate'
       }
     }
@@ -89,7 +102,9 @@ class App extends Component {
     this.setState({
       escolhaUsuario: escolhaUser,
       escolhaComputador: optComputer[sorteio],
-      resultado: res
+      resultado: res,
+      imagemJogador: imagemJokenpoJogador,
+      imagemComputador: imagemJokenpoComputador,
     })
 
     
@@ -113,9 +128,9 @@ class App extends Component {
         <View style={palco}>
           <Text style={resultado}>{this.state.resultado} </Text>
           <Text>Escolha do usuário: {this.state.escolhaUsuario}</Text>
-          <Image source ={require('./img/papel.png')}/>
+          <Text>{this.state.imagemJogador}</Text>
           <Text>Escolha do computador: {this.state.escolhaComputador}</Text>
-          <Image source ={require('./img/papel.png')}/>
+          <Text>{this.state.imagemComputador}</Text>
         </View>
       </View>
     )
