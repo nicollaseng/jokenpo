@@ -17,19 +17,32 @@ class App extends Component {
     super(props)
 
     this.state = {
-      escolhaUsuario: " "
+      escolhaUsuario: " ",
+      escolhaComputador: " ",
+      resultado: ""
     }
   }
 
   mudaEstado(escolhaUser){
+    const optComputer = new Array()
+    optComputer[0]= "Pedra"
+    optComputer[1]= "Tesoura"
+    optComputer[2]= "Papel"
+    var sorteio = Math.random()*3
+    sorteio = Math.floor(sorteio)
+
     this.setState({
-      escolhaUsuario: escolhaUser
+      escolhaUsuario: escolhaUser,
+      escolhaComputador: optComputer[sorteio],
     })
+
+    
   }
+
   render(){
     return(
       <View style={Estilo.geral}>
-        <Text>Escolha do computador: </Text>
+        <Text>Escolha do computador: {this.state.escolhaComputador}</Text>
         <Text>Escolha do usuário: {this.state.escolhaUsuario}</Text>
         <Text>Resultado: </Text>
         <Button title="Pedra" onPress={() => this.mudaEstado("Pedra")}></Button>
