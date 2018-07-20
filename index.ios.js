@@ -4,23 +4,31 @@ import {
   View,
   AppRegistry,
   Button,
-  Image
+  Image,
+  StyleSheet
 } from 'react-native'
 
-const Estilo = {
-  geral: {
-    marginVertical: 40
-  },
+const Estilo = StyleSheet.create({
   imagem: {
     width:300,
     height:300
   },
   viewImagem: {
+    marginVertical: 40,
     alignItems: 'center'
+  },
+  painelBotao: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  botao: {
+    width: 90,
   }
-}
+})
 
-const {geral, imagem, viewImagem} = Estilo
+const {geral, imagem, viewImagem, painelBotao, botao} = Estilo
 
 class App extends Component {
   constructor(props){
@@ -80,17 +88,24 @@ class App extends Component {
 
   render(){
     return(
-      <View style={geral}>
-
-      <Topo />
-      <View></View>
-      <View></View>
-        <Text>Escolha do usuário: {this.state.escolhaUsuario}</Text>
-        <Text>Escolha do computador: {this.state.escolhaComputador}</Text>
-        <Text>Resultado: {this.state.resultado} </Text>
-        <Button title="Pedra" onPress={() => this.mudaEstado("Pedra")}></Button>
-        <Button title="Papel" onPress={() => this.mudaEstado("Papel")}></Button>
-        <Button title="Tesoura" onPress={() => this.mudaEstado("Tesoura")}></Button>
+      <View>
+        <Topo />
+        <View sytle={painelBotao}>
+          <View style={botao}>
+                <Button title="Pedra" onPress={() => this.mudaEstado("Pedra")}></Button>
+          </View>
+          <View style={botao}>
+                <Button title="Papel"onPress={() => this.mudaEstado("Papel")}></Button>
+          </View>
+          <View style={botao}>      
+                <Button title="Tesoura" onPress={() => this.mudaEstado("Tesoura")}></Button>
+          </View>
+        </View>
+        <View>
+          <Text>Escolha do usuário: {this.state.escolhaUsuario}</Text>
+          <Text>Escolha do computador: {this.state.escolhaComputador}</Text>
+          <Text>Resultado: {this.state.resultado} </Text>
+        </View>
       </View>
     )
   }
@@ -106,5 +121,6 @@ class Topo extends Component {
     )
   }
 }
+
 
 AppRegistry.registerComponent('app3', () => App)
